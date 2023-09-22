@@ -639,105 +639,330 @@ myStr = "Hello World"; // Change this line
 // ___________________________________________ 35 Use Bracket Notation to Find the Nth Character in a String
 
 /*
+Bracket notation is a way to get a character at a specific index within a string.
 
+Most modern programming languages, like JavaScript, don't start counting at 1 like humans do. They start at 0. This is referred to as Zero-based indexing.
+
+For example, the character at index 0 in the word Charles is C. So if const firstName = "Charles", you can get the value of the first letter of the string by using firstName[0].
+
+Example:
+
+const firstName = "Charles";
+const firstLetter = firstName[0];
+firstLetter would have a value of the string C.
+
+Use bracket notation to find the first character in the lastName variable and assign it to firstLetterOfLastName.
+
+Hint: Try looking at the example above if you get stuck.
  */
+// Setup
+let firstLetterOfLastName = "";
+const lastName = "Lovelace";
 
-// ___________________________________________
+// Only change code below this line
+firstLetterOfLastName = lastName[0]; // Change this line
+
+// ___________________________________________ 36 Use Bracket Notation to Find the Last Character in a String
 
 /*
+In order to get the last letter of a string, you can subtract one from the string's length.
 
+For example, if const firstName = "Ada", you can get the value of the last letter of the string by using firstName[firstName.length - 1].
+
+Example:
+
+const firstName = "Ada";
+const lastLetter = firstName[firstName.length - 1];
+lastLetter would have a value of the string a.
+
+Use bracket notation to find the last character in the lastName variable.
+
+Hint: Try looking at the example above if you get stuck.
  */
+// Setup
+const lastName = "Lovelace";
 
-// ___________________________________________
+// Only change code below this line
+const lastLetterOfLastName = lastName[lastName.length-1]; // Change this line
+// ___________________________________________ 37 Use Bracket Notation to Find the Nth-to-Last Character in a String
 
 /*
+You can use the same principle we just used to retrieve the last character in a string to retrieve the Nth-to-last character.
 
+For example, you can get the value of the third-to-last letter of the const firstName = "Augusta" string by using firstName[firstName.length - 3]
+
+Example:
+
+const firstName = "Augusta";
+const thirdToLastLetter = firstName[firstName.length - 3];
+thirdToLastLetter would have a value of the string s.
+
+Use bracket notation to find the second-to-last character in the lastName string.
+
+Hint: Try looking at the example above if you get stuck.
  */
+// Setup
+const lastName = "Lovelace";
 
-// ___________________________________________
+// Only change code below this line
+const secondToLastLetterOfLastName = lastName[lastName.length - 2];; // Change this line
+// ___________________________________________ 38 Word Blanks
 
 /*
+You are provided sentences with some missing words, like nouns, verbs, adjectives and adverbs. You then fill in the missing pieces with words of your choice in a way that the completed sentence makes sense.
 
+Consider this sentence:
+
+It was really ____, and we ____ ourselves ____.
+This sentence has three missing pieces- an adjective, a verb and an adverb, and we can add words of our choice to complete it. We can then assign the completed sentence to a variable as follows:
+
+const sentence = "It was really " + "hot" + ", and we " + "laughed" + " ourselves " + "silly" + ".";
+In this challenge, we provide you with a noun, a verb, an adjective and an adverb. You need to form a complete sentence using words of your choice, along with the words we provide.
+
+You will need to use the string concatenation operator + to build a new string, using the provided variables: myNoun, myAdjective, myVerb, and myAdverb. You will then assign the formed string to the wordBlanks variable. You should not change the words assigned to the variables.
+
+You will also need to account for spaces in your string, so that the final sentence has spaces between all the words. The result should be a complete sentence.
  */
+const myNoun = "dog";
+const myAdjective = "big";
+const myVerb = "ran";
+const myAdverb = "quickly";
 
-// ___________________________________________
+// Only change code below this line
+const wordBlanks = `some ${myAdjective} ${myNoun} ${myVerb} ${myAdverb}`; // Change this line
+// Only change code above this line
+// ___________________________________________ 39 Store Multiple Values in one Variable using JavaScript Arrays
 
 /*
+With JavaScript array variables, we can store several pieces of data in one place.
 
+You start an array declaration with an opening square bracket, end it with a closing square bracket, and put a comma between each entry, like this:
+
+const sandwich = ["peanut butter", "jelly", "bread"];
+Modify the new array myArray so that it contains both a string and a number (in that order).
  */
-
-// ___________________________________________
+// Only change code below this line
+const myArray = ['some', 24];
+// ___________________________________________ 40 Nest one Array within Another Array
 
 /*
+You can also nest arrays within other arrays, like below:
 
+const teams = [["Bulls", 23], ["White Sox", 45]];
+This is also called a multi-dimensional array.
+
+Create a nested array called myArray.
  */
-
-// ___________________________________________
+// Only change code below this line
+const myArray = [['some'], [123]];
+// ___________________________________________ 41 Access Array Data with Indexes
 
 /*
+We can access the data inside arrays using indexes.
 
+Array indexes are written in the same bracket notation that strings use, except that instead of specifying a character, they are specifying an entry in the array. Like strings, arrays use zero-based indexing, so the first element in an array has an index of 0.
+
+
+Example
+
+const array = [50, 60, 70];
+console.log(array[0]);
+const data = array[1];
+The console.log(array[0]) prints 50, and data has the value 60.
  */
+const myArray = [50, 60, 70];
+const myData = myArray[0]
 
-// ___________________________________________
+// ___________________________________________ 42 Modify Array Data With Indexes
 
 /*
+Unlike strings, the entries of arrays are mutable and can be changed freely, even if the array was declared with const.
 
+Example
+
+const ourArray = [50, 40, 30];
+ourArray[0] = 15;
+ourArray now has the value [15, 40, 30].
+
+Note: There shouldn't be any spaces between the array name and the square brackets, like array [0]. Although JavaScript is able to process this correctly, this may confuse other programmers reading your code.
+
+Modify the data stored at index 0 of myArray to a value of 45.
  */
+// Setup
+const myArray = [18, 64, 99];
 
-// ___________________________________________
+// Only change code below this line
+myArray[0] = 45
+// ___________________________________________ 43 Access Multi-Dimensional Arrays With Indexes
 
 /*
+One way to think of a multi-dimensional array, is as an array of arrays. When you use brackets to access your array, the first set of brackets refers to the entries in the outermost (the first level) array, and each additional pair of brackets refers to the next level of entries inside.
 
+Example
+
+const arr = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9],
+  [[10, 11, 12], 13, 14]
+];
+
+const subarray = arr[3];
+const nestedSubarray = arr[3][0];
+const element = arr[3][0][1];
+In this example, subarray has the value [[10, 11, 12], 13, 14], nestedSubarray has the value [10, 11, 12], and element has the value 11 .
+
+Note: There shouldn't be any spaces between the array name and the square brackets, like array [0][0] and even this array [0] [0] is not allowed. Although JavaScript is able to process this correctly, this may confuse other programmers reading your code.
+
+Using bracket notation select an element from myArray such that myData is equal to 8.
  */
-
-// ___________________________________________
+const myArray = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9],
+    [[10, 11, 12], 13, 14],
+  ];
+  
+  const myData = myArray[2][1];
+// ___________________________________________ 44 Manipulate Arrays With push Method
 
 /*
+An easy way to append data to the end of an array is via the push() method.
 
+The push() method takes one or more arguments and appends them to the end of the array, in the order in which they appear. It returns the new length of the array.
+
+Examples:
+
+const arr1 = [1, 2, 3];
+arr1.push(4, 5);
+
+const arr2 = ["Stimpson", "J", "cat"];
+arr2.push(["happy", "joy"]);
+arr1 now has the value [1, 2, 3, 4, 5] and arr2 has the value ["Stimpson", "J", "cat", ["happy", "joy"]].
+
+Push ["dog", 3] onto the end of the myArray variable.
  */
+// Setup
+const myArray = [["John", 23], ["cat", 2]];
 
-// ___________________________________________
+// Only change code below this line
+myArray.push(["dog", 3])
+// ___________________________________________ 45 Manipulate Arrays With pop Method
 
 /*
+Another way to change the data in an array is with the .pop() function.
 
+.pop() is used to pop a value off of the end of an array. We can store this popped off value by assigning it to a variable. In other words, .pop() removes the last element from an array and returns that element.
+
+Any type of entry can be popped off of an array - numbers, strings, even nested arrays.
+
+const threeArr = [1, 4, 6];
+const oneDown = threeArr.pop();
+console.log(oneDown);
+console.log(threeArr);
+The first console.log will display the value 6, and the second will display the value [1, 4].
+
+Use the .pop() function to remove the last item from myArray and assign the popped off value to a new variable, removedFromMyArray.
  */
+// Setup
+const myArray = [["John", 23], ["cat", 2]];
 
-// ___________________________________________
+// Only change code below this line
+const removedFromMyArray = myArray.pop()
+// ___________________________________________ 46 Manipulate Arrays With shift Method
 
 /*
+pop() always removes the last element of an array. What if you want to remove the first?
 
+That's where .shift() comes in. It works just like .pop(), except it removes the first element instead of the last.
+
+Example:
+
+const ourArray = ["Stimpson", "J", ["cat"]];
+const removedFromOurArray = ourArray.shift();
+removedFromOurArray would have a value of the string Stimpson, and ourArray would have ["J", ["cat"]].
+
+Use the .shift() function to remove the first item from myArray and assign the "shifted off" value to a new variable, removedFromMyArray.
  */
+// Setup
+const myArray = [["John", 23], ["dog", 3]];
 
-// ___________________________________________
+// Only change code below this line
+const removedFromMyArray = myArray.shift()
+// ___________________________________________ 47 Manipulate Arrays With unshift Method
 
 /*
+Not only can you shift elements off of the beginning of an array, you can also unshift elements to the beginning of an array i.e. add elements in front of the array.
 
+.unshift() works exactly like .push(), but instead of adding the element at the end of the array, unshift() adds the element at the beginning of the array.
+
+Example:
+
+const ourArray = ["Stimpson", "J", "cat"];
+ourArray.shift();
+ourArray.unshift("Happy");
+After the shift, ourArray would have the value ["J", "cat"]. After the unshift, ourArray would have the value ["Happy", "J", "cat"].
+
+Add ["Paul", 35] to the beginning of the myArray variable using unshift().
  */
+// Setup
+const myArray = [["John", 23], ["dog", 3]];
+myArray.shift();
 
-// ___________________________________________
+// Only change code below this line
+myArray.unshift(["Paul", 35])
+// ___________________________________________ 48 Shopping List
 
 /*
+Create a shopping list in the variable myList. The list should be a multi-dimensional array containing several sub-arrays.
 
+The first element in each sub-array should contain a string with the name of the item. The second element should be a number representing the quantity i.e.
+
+["Chocolate Bar", 15]
+There should be at least 5 sub-arrays in the list.
  */
-
-// ___________________________________________
+const myList = [["Chocolate Bar", 15],["Chocolate Bar", 15],["Chocolate Bar", 15],["Chocolate Bar", 15],["Chocolate Bar", 15],];
+// ___________________________________________ 49 Write Reusable JavaScript with Functions
 
 /*
+In JavaScript, we can divide up our code into reusable parts called functions.
+
+Here's an example of a function:
+
+function functionName() {
+  console.log("Hello World");
+}
+You can call or invoke this function by using its name followed by parentheses, like this: functionName(); Each time the function is called it will print out the message Hello World on the dev console. All of the code between the curly braces will be executed every time the function is called.
+
+Create a function called reusableFunction which prints the string Hi World to the dev console.
+Call the function.
 
  */
-
-// ___________________________________________
+function reusableFunction() {
+    console.log('Hi World')
+  }
+  
+  reusableFunction()
+// ___________________________________________ 50 Passing Values to Functions with Arguments
 
 /*
+Parameters are variables that act as placeholders for the values that are to be input to a function when it is called. When a function is defined, it is typically defined along with one or more parameters. The actual values that are input (or "passed") into a function when it is called are known as arguments.
 
+Here is a function with two parameters, param1 and param2:
+
+function testFun(param1, param2) {
+  console.log(param1, param2);
+}
+Then we can call testFun like this: testFun("Hello", "World");. We have passed two string arguments, Hello and World. Inside the function, param1 will equal the string Hello and param2 will equal the string World. Note that you could call testFun again with different arguments and the parameters would take on the value of the new arguments.
+
+Create a function called functionWithArgs that accepts two arguments and outputs their sum to the dev console.
+Call the function with two numbers as arguments.
  */
-
-// ___________________________________________
-
-/*
-
- */
-
+function functionWithArgs (param1, param2) {
+    console.log(param1 + param2)
+  }
+  
+  functionWithArgs(1,2)
 // ___________________________________________
 
 /*
