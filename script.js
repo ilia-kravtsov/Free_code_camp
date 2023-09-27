@@ -2325,72 +2325,414 @@ The first checkForProperty function call returns true, while the second returns 
 
 Modify the function checkObj to test if the object passed to the function parameter obj contains the specific property passed to the function parameter checkProp. If the property passed to checkProp is found on obj, return that property's value. If not, return Not Found.
 */
-
-// ___________________________________________
+function checkObj(obj, checkProp) {
+  // Only change code below this line
+  if (obj.hasOwnProperty(checkProp)) {
+    return obj[checkProp]
+  } else {
+    return 'Not Found'
+  }
+  return "Change Me!";
+  // Only change code above this line
+}
+// ___________________________________________ 92 Manipulating Complex Objects
 
 /*
+Sometimes you may want to store data in a flexible Data Structure. A JavaScript object is one way to handle flexible data. They allow for arbitrary combinations of strings, numbers, booleans, arrays, functions, and objects.
+
+Here's an example of a complex data structure:
+
+const ourMusic = [
+  {
+    "artist": "Daft Punk",
+    "title": "Homework",
+    "release_year": 1997,
+    "formats": [ 
+      "CD", 
+      "Cassette", 
+      "LP"
+    ],
+    "gold": true
+  }
+];
+This is an array which contains one object inside. The object has various pieces of metadata about an album. It also has a nested formats array. If you want to add more album records, you can do this by adding records to the top level array. Objects hold data in a property, which has a key-value format. In the example above, "artist": "Daft Punk" is a property that has a key of artist and a value of Daft Punk.
+
+Note: You will need to place a comma after every object in the array, unless it is the last object in the array.
+
+Add a new album to the myMusic array. Add artist and title strings, release_year number, and a formats array of strings.
+*/
+const myMusic = [
+  {
+    "artist": "Billy Joel",
+    "title": "Piano Man",
+    "release_year": 1973,
+    "formats": [
+      "CD",
+      "8T",
+      "LP"
+    ],
+    "gold": true
+  },
+    {
+    "artist": "Billy Joel",
+    "title": "Piano Man",
+    "release_year": 1973,
+    "formats": [
+      "CD",
+      "8T",
+      "LP"
+    ],
+    "gold": true
+  },
+];
+// ___________________________________________ 93 Accessing Nested Objects
+
+/*
+The sub-properties of objects can be accessed by chaining together the dot or bracket notation.
+
+Here is a nested object:
+
+const ourStorage = {
+  "desk": {
+    "drawer": "stapler"
+  },
+  "cabinet": {
+    "top drawer": { 
+      "folder1": "a file",
+      "folder2": "secrets"
+    },
+    "bottom drawer": "soda"
+  }
+};
+
+ourStorage.cabinet["top drawer"].folder2;
+ourStorage.desk.drawer;
+ourStorage.cabinet["top drawer"].folder2 would be the string secrets, and ourStorage.desk.drawer would be the string stapler.
+
+Access the myStorage object and assign the contents of the glove box property to the gloveBoxContents variable. Use dot notation for all properties where possible, otherwise use bracket notation.
+*/
+const myStorage = {
+  "car": {
+    "inside": {
+      "glove box": "maps",
+      "passenger seat": "crumbs"
+     },
+    "outside": {
+      "trunk": "jack"
+    }
+  }
+};
+
+const gloveBoxContents = myStorage.car.inside['glove box'];
+// ___________________________________________ 94 Accessing Nested Arrays
+
+/*
+As we have seen in earlier examples, objects can contain both nested objects and nested arrays. Similar to accessing nested objects, array bracket notation can be chained to access nested arrays.
+
+Here is an example of how to access a nested array:
+
+const ourPets = [
+  {
+    animalType: "cat",
+    names: [
+      "Meowzer",
+      "Fluffy",
+      "Kit-Cat"
+    ]
+  },
+  {
+    animalType: "dog",
+    names: [
+      "Spot",
+      "Bowser",
+      "Frankie"
+    ]
+  }
+];
+
+ourPets[0].names[1];
+ourPets[1].names[0];
+ourPets[0].names[1] would be the string Fluffy, and ourPets[1].names[0] would be the string Spot.
+
+Using dot and bracket notation, set the variable secondTree to the second item in the trees list from the myPlants object.
+
 
 */
+const myPlants = [
+  {
+    type: "flowers",
+    list: [
+      "rose",
+      "tulip",
+      "dandelion"
+    ]
+  },
+  {
+    type: "trees",
+    list: [
+      "fir",
+      "pine",
+      "birch"
+    ]
+  }
+];
 
-// ___________________________________________
+const secondTree = myPlants[1].list[1];
+// ___________________________________________ 95 Record Collection
 
 /*
+You are creating a function that aids in the maintenance of a musical album collection. The collection is organized as an object that contains multiple albums which are also objects. Each album is represented in the collection with a unique id as the property name. Within each album object, there are various properties describing information about the album. Not all albums have complete information.
 
+The updateRecords function takes 4 arguments represented by the following function parameters:
+
+records - an object containing several individual albums
+id - a number representing a specific album in the records object
+prop - a string representing the name of the album’s property to update
+value - a string containing the information used to update the album’s property
+Complete the function using the rules below to modify the object passed to the function.
+
+Your function must always return the entire records object.
+If value is an empty string, delete the given prop property from the album.
+If prop isn't tracks and value isn't an empty string, assign the value to that album's prop.
+If prop is tracks and value isn't an empty string, you need to update the album's tracks array. First, if the album does not have a tracks property, assign it an empty array. Then add the value as the last item in the album's tracks array.
+Note: A copy of the recordCollection object is used for the tests. You should not directly modify the recordCollection object.
 */
+// Setup
+const recordCollection = {
+  2548: {
+    albumTitle: 'Slippery When Wet',
+    artist: 'Bon Jovi',
+    tracks: ['Let It Rock', 'You Give Love a Bad Name']
+  },
+  2468: {
+    albumTitle: '1999',
+    artist: 'Prince',
+    tracks: ['1999', 'Little Red Corvette']
+  },
+  1245: {
+    artist: 'Robert Palmer',
+    tracks: []
+  },
+  5439: {
+    albumTitle: 'ABBA Gold'
+  }
+};
 
-// ___________________________________________
+// Only change code below this line
+function updateRecords(records, id, prop, value) {
+  const recordsCopy = {...records}
+  if (value.length === 0) {
+    delete recordsCopy[id][prop]
+  } else if (prop !== 'tracks') {
+    recordsCopy[id][prop] = value
+  } else if (prop === 'tracks' && value.length) {
+    if (!recordsCopy[id].hasOwnProperty('tracks')) {
+      recordsCopy[id]['tracks'] = []
+    }
+    recordsCopy[id]['tracks'].push(value)
+  }
+  return recordsCopy;
+}
+
+updateRecords(recordCollection, 5439, 'artist', 'ABBA');
+// ___________________________________________ 96 Iterate with JavaScript While Loops
 
 /*
+You can run the same code multiple times by using a loop.
 
+The first type of loop we will learn is called a while loop because it runs while a specified condition is true and stops once that condition is no longer true.
+
+const ourArray = [];
+let i = 0;
+
+while (i < 5) {
+  ourArray.push(i);
+  i++;
+}
+In the code example above, the while loop will execute 5 times and append the numbers 0 through 4 to ourArray.
+
+Let's try getting a while loop to work by pushing values to an array.
+
+Add the numbers 5 through 0 (inclusive) in descending order to myArray using a while loop.
 */
+// Setup
+const myArray = [];
+let i = 5;
+while (i >= 0) {
+  myArray.push(i);
+  i--;
+}
+// Only change code below this line
 
-// ___________________________________________
+// ___________________________________________ 97 Iterate with JavaScript For Loops
 
 /*
+You can run the same code multiple times by using a loop.
 
+The most common type of JavaScript loop is called a for loop because it runs for a specific number of times.
+
+For loops are declared with three optional expressions separated by semicolons:
+
+for (a; b; c), where a is the initialization statement, b is the condition statement, and c is the final expression.
+
+The initialization statement is executed one time only before the loop starts. It is typically used to define and setup your loop variable.
+
+The condition statement is evaluated at the beginning of every loop iteration and will continue as long as it evaluates to true. When the condition is false at the start of the iteration, the loop will stop executing. This means if the condition starts as false, your loop will never execute.
+
+The final expression is executed at the end of each loop iteration, prior to the next condition check and is usually used to increment or decrement your loop counter.
+
+In the following example we initialize with i = 0 and iterate while our condition i < 5 is true. We'll increment i by 1 in each loop iteration with i++ as our final expression.
+
+const ourArray = [];
+
+for (let i = 0; i < 5; i++) {
+  ourArray.push(i);
+}
+ourArray will now have the value [0, 1, 2, 3, 4].
+
+Use a for loop to push the values 1 through 5 onto myArray.
 */
+// Setup
+const myArray = [];
+for (let i = 1; i <= 5; i++) {
+  myArray.push(i);
+}
+// Only change code below this line
 
-// ___________________________________________
+// ___________________________________________ 98 Iterate Odd Numbers With a For Loop
 
 /*
+For loops don't have to iterate one at a time. By changing our final-expression, we can count by even numbers.
 
+We'll start at i = 0 and loop while i < 10. We'll increment i by 2 each loop with i += 2.
+
+const ourArray = [];
+
+for (let i = 0; i < 10; i += 2) {
+  ourArray.push(i);
+}
+ourArray will now contain [0, 2, 4, 6, 8]. Let's change our initialization so we can count by odd numbers.
+
+Push the odd numbers from 1 through 9 to myArray using a for loop.
 */
+// Setup
+const myArray = [];
+for (let i = 1; i < 10; i += 2) {
+  myArray.push(i);
+}
+// Only change code below this line
 
-// ___________________________________________
+// ___________________________________________ 99 Count Backwards With a For Loop
 
 /*
+A for loop can also count backwards, so long as we can define the right conditions.
 
+In order to decrement by two each iteration, we'll need to change our initialization, condition, and final expression.
+
+We'll start at i = 10 and loop while i > 0. We'll decrement i by 2 each loop with i -= 2.
+
+const ourArray = [];
+
+for (let i = 10; i > 0; i -= 2) {
+  ourArray.push(i);
+}
+ourArray will now contain [10, 8, 6, 4, 2]. Let's change our initialization and final expression so we can count backwards by twos to create an array of descending odd numbers.
+
+Push the odd numbers from 9 through 1 to myArray using a for loop.
 */
+// Setup
+const myArray = [];
+for (let i = 9; i > 0; i -= 2) {
+  myArray.push(i);
+}
+// Only change code below this line
 
-// ___________________________________________
+// ___________________________________________ 100 Iterate Through an Array with a For Loop
 
 /*
+A common task in JavaScript is to iterate through the contents of an array. One way to do that is with a for loop. This code will output each element of the array arr to the console:
 
+const arr = [10, 9, 8, 7, 6];
+
+for (let i = 0; i < arr.length; i++) {
+   console.log(arr[i]);
+}
+Remember that arrays have zero-based indexing, which means the last index of the array is length - 1. Our condition for this loop is i < arr.length, which stops the loop when i is equal to length. In this case the last iteration is i === 4 i.e. when i becomes equal to arr.length - 1 and outputs 6 to the console. Then i increases to 5, and the loop terminates because i < arr.length is false.
+
+Declare and initialize a variable total to 0. Use a for loop to add the value of each element of the myArr array to total.
 */
+// Setup
+const myArr = [2, 3, 4, 5, 6];
+let total = 0;
+for (let i = 0; i < myArr.length; i++) {
+   total += myArr[i]
+}
+// Only change code below this line
 
-
-// ___________________________________________
+// ___________________________________________ 101 Nesting For Loops
 
 /*
+If you have a multi-dimensional array, you can use the same logic as the prior waypoint to loop through both the array and any sub-arrays. Here is an example:
 
+const arr = [
+  [1, 2], [3, 4], [5, 6]
+];
+
+for (let i = 0; i < arr.length; i++) {
+  for (let j = 0; j < arr[i].length; j++) {
+    console.log(arr[i][j]);
+  }
+}
+This outputs each sub-element in arr one at a time. Note that for the inner loop, we are checking the .length of arr[i], since arr[i] is itself an array.
+
+Modify function multiplyAll so that it returns the product of all the numbers in the sub-arrays of arr.
 */
+function multiplyAll(arr) {
+  let product = 1;
+  // Only change code below this line
+  for (let i = 0; i < arr.length; i++) {
+  for (let j = 0; j < arr[i].length; j++) {
+    product *= arr[i][j] 
+  }
+}
+  // Only change code above this line
+  return product;
+}
 
-// ___________________________________________
+multiplyAll([[1, 2], [3, 4], [5, 6, 7]]);
+// ___________________________________________ 102 Iterate with JavaScript Do...While Loops
 
 /*
+The next type of loop you will learn is called a do...while loop. It is called a do...while loop because it will first do one pass of the code inside the loop no matter what, and then continue to run the loop while the specified condition evaluates to true.
 
-*/
+const ourArray = [];
+let i = 0;
 
-// ___________________________________________
+do {
+  ourArray.push(i);
+  i++;
+} while (i < 5);
+The example above behaves similar to other types of loops, and the resulting array will look like [0, 1, 2, 3, 4]. However, what makes the do...while different from other loops is how it behaves when the condition fails on the first check. Let's see this in action. Here is a regular while loop that will run the code in the loop as long as i < 5:
 
-/*
+const ourArray = []; 
+let i = 5;
 
-*/
+while (i < 5) {
+  ourArray.push(i);
+  i++;
+}
+In this example, we initialize the value of ourArray to an empty array and the value of i to 5. When we execute the while loop, the condition evaluates to false because i is not less than 5, so we do not execute the code inside the loop. The result is that ourArray will end up with no values added to it, and it will still look like [] when all of the code in the example above has completed running. Now, take a look at a do...while loop:
 
-// ___________________________________________
+const ourArray = []; 
+let i = 5;
 
-/*
+do {
+  ourArray.push(i);
+  i++;
+} while (i < 5);
+In this case, we initialize the value of i to 5, just like we did with the while loop. When we get to the next line, there is no condition to evaluate, so we go to the code inside the curly braces and execute it. We will add a single element to the array and then increment i before we get to the condition check. When we finally evaluate the condition i < 5 on the last line, we see that i is now 6, which fails the conditional check, so we exit the loop and are done. At the end of the above example, the value of ourArray is [5]. Essentially, a do...while loop ensures that the code inside the loop will run at least once. Let's try getting a do...while loop to work by pushing values to an array.
 
+Change the while loop in the code to a do...while loop so the loop will push only the number 10 to myArray, and i will be equal to 11 when your code has finished running.
 */
 
 // ___________________________________________
