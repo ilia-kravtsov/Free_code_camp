@@ -5229,69 +5229,310 @@ After adding all the examples, the object will look like this:
 };
 A foods object has been created with three entries. Using the syntax of your choice, add three more entries to it: bananas with a value of 13, grapes with a value of 35, and strawberries with a value of 27.
 */
+let foods = {
+  apples: 25,
+  oranges: 32,
+  plums: 28
+};
 
-// ___________________________________________
+// Only change code below this line
+foods['bananas'] = 13; 
+foods['grapes'] = 35; 
+foods['strawberries'] = 27; 
+// Only change code above this line
+
+console.log(foods);
+
+// ___________________________________________ 14 Modify an Object Nested Within an Object
 
 /*
+Now let's take a look at a slightly more complex object. Object properties can be nested to an arbitrary depth, and their values can be any type of data supported by JavaScript, including arrays and even other objects. Consider the following:
 
+let nestedObject = {
+  id: 28802695164,
+  date: 'December 31, 2016',
+  data: {
+    totalUsers: 99,
+    online: 80,
+    onlineStatus: {
+      active: 67,
+      away: 13,
+      busy: 8
+    }
+  }
+};
+nestedObject has three properties: id (value is a number), date (value is a string), and data (value is an object with its nested structure). While structures can quickly become complex, we can still use the same notations to access the information we need. To assign the value 10 to the busy property of the nested onlineStatus object, we use dot notation to reference the property:
+
+nestedObject.data.onlineStatus.busy = 10;
+Here we've defined an object userActivity, which includes another object nested within it. Set the value of the online key to 45.
+*/
+let userActivity = {
+  id: 23894201352,
+  date: 'January 1, 2017',
+  data: {
+    totalUsers: 51,
+    online: 42
+  }
+};
+
+// Only change code below this line
+userActivity.data.online = 45
+// Only change code above this line
+
+console.log(userActivity);
+// ___________________________________________ 15 Access Property Names with Bracket Notation
+
+/*
+In the first object challenge we mentioned the use of bracket notation as a way to access property values using the evaluation of a variable. For instance, imagine that our foods object is being used in a program for a supermarket cash register. We have some function that sets the selectedFood and we want to check our foods object for the presence of that food. This might look like:
+
+let selectedFood = getCurrentFood(scannedItem);
+let inventory = foods[selectedFood];
+This code will evaluate the value stored in the selectedFood variable and return the value of that key in the foods object, or undefined if it is not present. Bracket notation is very useful because sometimes object properties are not known before runtime or we need to access them in a more dynamic way.
+
+We've defined a function, checkInventory, which receives a scanned item as an argument. Return the current value of the scannedItem key in the foods object. You can assume that only valid keys will be provided as an argument to checkInventory.
+*/
+let foods = {
+  apples: 25,
+  oranges: 32,
+  plums: 28,
+  bananas: 13,
+  grapes: 35,
+  strawberries: 27
+};
+
+function checkInventory(scannedItem) {
+  // Only change code below this line
+  return foods[scannedItem]
+  // Only change code above this line
+}
+
+console.log(checkInventory("apples"));
+// ___________________________________________ 16 Use the delete Keyword to Remove Object Properties
+
+/*
+Now you know what objects are and their basic features and advantages. In short, they are key-value stores which provide a flexible, intuitive way to structure data, and, they provide very fast lookup time. Throughout the rest of these challenges, we will describe several common operations you can perform on objects so you can become comfortable applying these useful data structures in your programs.
+
+In earlier challenges, we have both added to and modified an object's key-value pairs. Here we will see how we can remove a key-value pair from an object.
+
+Let's revisit our foods object example one last time. If we wanted to remove the apples key, we can remove it by using the delete keyword like this:
+
+delete foods.apples;
+Use the delete keyword to remove the oranges, plums, and strawberries keys from the foods object.
+*/
+let foods = {
+  apples: 25,
+  oranges: 32,
+  plums: 28,
+  bananas: 13,
+  grapes: 35,
+  strawberries: 27
+};
+
+// Only change code below this line
+delete foods.oranges;
+delete foods.plums;
+delete foods.strawberries ;
+// Only change code above this line
+
+console.log(foods);
+// ___________________________________________ 17 Check if an Object has a Property
+
+/*
+Now we can add, modify, and remove keys from objects. But what if we just wanted to know if an object has a specific property? JavaScript provides us with two different ways to do this. One uses the hasOwnProperty() method and the other uses the in keyword. If we have an object users with a property of Alan, we could check for its presence in either of the following ways:
+
+users.hasOwnProperty('Alan');
+'Alan' in users;
+Both of these would return true.
+
+Finish writing the function so that it returns true if the object passed to it contains all four names, Alan, Jeff, Sarah and Ryan and returns false otherwise.
+*/
+let users = {
+  Alan: {
+    age: 27,
+    online: true
+  },
+  Jeff: {
+    age: 32,
+    online: true
+  },
+  Sarah: {
+    age: 48,
+    online: true
+  },
+  Ryan: {
+    age: 19,
+    online: true
+  }
+};
+
+function isEveryoneHere(userObj) {
+  // Only change code below this line
+  return 'Alan' in userObj && 'Jeff' in userObj && 'Sarah' in userObj && 'Ryan' in userObj 
+  // Only change code above this line
+}
+
+console.log(isEveryoneHere(users));
+// ___________________________________________ 18 Iterate Through the Keys of an Object with a for...in Statement
+
+/*
+Sometimes you need to iterate through all the keys within an object. You can use a for...in loop to do this. The for...in loop looks like:
+
+const refrigerator = {
+  'milk': 1,
+  'eggs': 12,
+};
+
+for (const food in refrigerator) {
+  console.log(food, refrigerator[food]);
+}
+This code logs milk 1 and eggs 12, with each key-value pair on its own line.
+
+We defined the variable food in the loop head and this variable was set to each of the object's keys on each iteration, resulting in each food's name being printed to the console.
+
+NOTE: Objects do not maintain an ordering to stored keys like arrays do; thus a key's position on an object, or the relative order in which it appears, is irrelevant when referencing or accessing that key.
+
+We've defined a function countOnline which accepts one argument, allUsers. Use a for...in statement inside this function to loop through the allUsers object and return the number of users whose online property is set to true. An example of an object which could be passed to countOnline is shown below. Each user will have an online property set to either true or false.
+
+{
+  Alan: {
+    online: false
+  },
+  Jeff: {
+    online: true
+  },
+  Sarah: {
+    online: false
+  }
+}
+*/
+const users = {
+  Alan: {
+    online: false
+  },
+  Jeff: {
+    online: true
+  },
+  Sarah: {
+    online: false
+  }
+}
+
+function countOnline(allUsers) {
+  // Only change code below this line
+  let count = 0;
+  for (const user in allUsers) {
+    if (allUsers[user].online) count++;
+  }
+  return count;
+  // Only change code above this line
+}
+
+console.log(countOnline(users));
+// ___________________________________________ 19 Generate an Array of All Object Keys with Object.keys()
+
+/*
+We can also generate an array which contains all the keys stored in an object with the Object.keys() method. This method takes an object as the argument and returns an array of strings representing each property in the object. Again, there will be no specific order to the entries in the array.
+
+Finish writing the getArrayOfUsers function so that it returns an array containing all the properties in the object it receives as an argument.
+*/
+let users = {
+  Alan: {
+    age: 27,
+    online: false
+  },
+  Jeff: {
+    age: 32,
+    online: true
+  },
+  Sarah: {
+    age: 48,
+    online: false
+  },
+  Ryan: {
+    age: 19,
+    online: true
+  }
+};
+
+function getArrayOfUsers(obj) {
+  // Only change code below this line
+  return Object.keys(obj)
+  // Only change code above this line
+}
+
+console.log(getArrayOfUsers(users));
+// ___________________________________________ 20 Modify an Array Stored in an Object
+
+/*
+Now you've seen all the basic operations for JavaScript objects. You can add, modify, and remove key-value pairs, check if keys exist, and iterate over all the keys in an object. As you continue learning JavaScript you will see even more versatile applications of objects. Additionally, the Data Structures lessons located in the Coding Interview Prep section of the curriculum also cover the ES6 Map and Set objects, both of which are similar to ordinary objects but provide some additional features. Now that you've learned the basics of arrays and objects, you're fully prepared to begin tackling more complex problems using JavaScript!
+
+Take a look at the object we've provided in the code editor. The user object contains three keys. The data key contains five keys, one of which contains an array of friends. From this, you can see how flexible objects are as data structures. We've started writing a function addFriend. Finish writing it so that it takes a user object and adds the name of the friend argument to the array stored in user.data.friends and returns that array.
 */
 
-// ___________________________________________
+let user = {
+  name: 'Kenneth',
+  age: 28,
+  data: {
+    username: 'kennethCodesAllDay',
+    joinDate: 'March 26, 2016',
+    organization: 'freeCodeCamp',
+    friends: [
+      'Sam',
+      'Kira',
+      'Tomo'
+    ],
+    location: {
+      city: 'San Francisco',
+      state: 'CA',
+      country: 'USA'
+    }
+  }
+};
+
+function addFriend(userObj, friend) {
+  // Only change code below this line
+  userObj.data.friends.push(friend)
+  return userObj.data.friends
+  // Only change code above this line
+}
+
+console.log(addFriend(user, 'Pete'));
+// ___________________________________________ Basic Algorithm Scripting
+// ******************************************* 
+
+// ___________________________________________ 1 Convert Celsius to Fahrenheit 
 
 /*
+The formula to convert from Celsius to Fahrenheit is the temperature in Celsius times 9/5, plus 32.
 
+You are given a variable celsius representing a temperature in Celsius. Use the variable fahrenheit already defined and assign it the Fahrenheit temperature equivalent to the given Celsius temperature. Use the formula mentioned above to help convert the Celsius temperature to Fahrenheit.
 */
+const convertCtoF = celsius => celsius*(9/5)+32;
 
-// ___________________________________________
+convertCtoF(30);
+// ___________________________________________ 2 Reverse a String
 
 /*
+Reverse the provided string and return the reversed string.
 
+For example, "hello" should become "olleh".
 */
+const reverseString = str => str.split('').reverse().join('')
+// const reverseString = str => [...str].reverse().join('')
 
-// ___________________________________________
-
-/*
-
-*/
-
-// ___________________________________________
+reverseString("hello");
+// ___________________________________________ 3 Factorialize a Number
 
 /*
+Return the factorial of the provided integer.
 
-*/
+If the integer is represented with the letter n, a factorial is the product of all positive integers less than or equal to n.
 
-// ___________________________________________
+Factorials are often represented with the shorthand notation n!
 
-/*
+For example: 5! = 1 * 2 * 3 * 4 * 5 = 120
 
-*/
-
-// ___________________________________________
-
-/*
-
-*/
-
-// ___________________________________________
-
-
-
-// ___________________________________________
-
-/*
-
-*/
-
-// ___________________________________________
-
-/*
-
-*/
-
-// ___________________________________________
-
-/*
-
+Only integers greater than or equal to zero will be supplied to the function.
 */
 
 // ___________________________________________
