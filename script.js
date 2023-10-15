@@ -5534,17 +5534,43 @@ For example: 5! = 1 * 2 * 3 * 4 * 5 = 120
 
 Only integers greater than or equal to zero will be supplied to the function.
 */
+function factorialize(num) {
+  if (num === 0) return 1;
+  let start = []
+  for (let i = num; i > 0; i--) {
+    start.push(i)
+  }
+  return start.reduce((acc, value) => acc * value);
+}
 
-// ___________________________________________
+factorialize(5);
+// ___________________________________________ 4 Find the Longest Word in a String
 
 /*
+Return the length of the longest word in the provided sentence.
 
+Your response should be a number.
 */
+function findLongestWordLength(str) {
+  let newArr = str.split(' ')
+  let result = []
+  for (let i = 0; i < newArr.length; i++) {
+      let count = 0
+      for(let j = 0; j < newArr[i].length; j++) {
+        count++
+      }
+      result.push(count)
+  }
+  return Math.max(...result);
+}
 
-// ___________________________________________
+findLongestWordLength("The quick brown fox jumped over the lazy dog");
+// ___________________________________________ 5 Return Largest Numbers in Arrays
 
 /*
+Return an array consisting of the largest number from each provided sub-array. For simplicity, the provided array will contain exactly 4 sub-arrays.
 
+Remember, you can iterate through an array with a simple for loop, and access each member with array syntax arr[i].
 */
 
 // ___________________________________________
