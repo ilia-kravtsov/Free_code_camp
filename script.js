@@ -5572,35 +5572,84 @@ Return an array consisting of the largest number from each provided sub-array. F
 
 Remember, you can iterate through an array with a simple for loop, and access each member with array syntax arr[i].
 */
+function largestOfFour(arr) {
+  let result = []
+  for (let i = 0; i < arr.length; i++) {
+    result.push(Math.max(...arr[i]))  
+  }
+  return result
+}
 
-// ___________________________________________
-
-/*
-
-*/
-
-// ___________________________________________
-
-/*
-
-*/
-
-// ___________________________________________
+largestOfFour([[4, 5, 1, 3], [13, 27, 18, 26], [32, 35, 37, 39], [1000, 1001, 857, 1]]);
+// ___________________________________________ 6 Confirm the Ending
 
 /*
+Check if a string (first argument, str) ends with the given target string (second argument, target).
 
+This challenge can be solved with the .endsWith() method, which was introduced in ES2015. But for the purpose of this challenge, we would like you to use one of the JavaScript substring methods instead.
 */
+function confirmEnding(str, target) {
+  let strEnding = str.slice(-target.length)
+  return strEnding === target
+}
 
-// ___________________________________________
-
-
-
-// ___________________________________________
+confirmEnding("Open sesame", "same");
+// ___________________________________________ 7 Repeat a String Repeat a String
 
 /*
-
+Repeat a given string str (first argument) for num times (second argument). Return an empty string if num is not a positive number. For the purpose of this challenge, do not use the built-in .repeat() method.
 */
+function repeatStringNumTimes(str, num) {
+  if (num < 0) return ''
+  let newArr = []
+  for (let i = 0; i < num; i++) {
+    newArr.push(str)
+  }
+  return newArr.join('');
+}
 
+repeatStringNumTimes("abc", 3);
+// ___________________________________________ 8 Truncate a String
+
+/*
+Truncate a string (first argument) if it is longer than the given maximum string length (second argument). Return the truncated string with a ... ending.
+*/
+function truncateString(str, num) {
+  if (str.length > num) {
+    return `${str.slice(0,num)}...`
+  } else {
+    return str
+  }
+}
+
+truncateString("A-tisket a-tasket A green and yellow basket", 8);
+// ___________________________________________ 9 Finders Keepers
+
+/*
+Create a function that looks through an array arr and returns the first element in it that passes a 'truth test'. This means that given an element x, the 'truth test' is passed if func(x) is true. If no element passes the test, return undefined.
+*/
+function findElement(arr, func) {
+  for (let i = 0; i < arr.length; i++) {
+    if (func(arr[i]) === true) {
+      return arr[i]
+    }
+  }
+  return undefined
+}
+
+findElement([1, 2, 3, 4], num => num % 2 === 0);
+// ___________________________________________ 10 Boo who
+
+/*
+Check if a value is classified as a boolean primitive. Return true or false.
+
+Boolean primitives are true and false.
+*/
+function booWho(bool) {
+  return 'boolean' === typeof bool;
+}
+
+booWho(null);
 // ___________________________________________
 
 /*
