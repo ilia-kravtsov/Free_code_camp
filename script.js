@@ -7684,36 +7684,151 @@ function urlSlug(title) {
 // Only change code above this line
 console.log(urlSlug(" Winter Is  Coming"))
 urlSlug(" Winter Is  Coming");
-// ___________________________________________
+// ___________________________________________ Use the every Method to Check that Every Element in an Array Meets a Criteria
 
 /*
+The every method works with arrays to check if every element passes a particular test. It returns a Boolean value - true if all values meet the criteria, false if not.
 
+For example, the following code would check if every element in the numbers array is less than 10:
+
+const numbers = [1, 5, 8, 0, 10, 11];
+
+numbers.every(function(currentValue) {
+  return currentValue < 10;
+});
+The every method would return false here.
+
+Use the every method inside the checkPositive function to check if every element in arr is positive. The function should return a Boolean value.
 */
+function checkPositive(arr) {
+  // Only change code below this line
 
-// ___________________________________________
+  return arr.every((n) => n > 0)
+  // Only change code above this line
+}
+
+checkPositive([1, 2, 3, -4, 5]);
+// ___________________________________________ Use the some Method to Check that Any Elements in an Array Meet a Criteria
 
 /*
+The some method works with arrays to check if any element passes a particular test. It returns a Boolean value - true if any of the values meet the criteria, false if not.
 
+For example, the following code would check if any element in the numbers array is less than 10:
+
+const numbers = [10, 50, 8, 220, 110, 11];
+
+numbers.some(function(currentValue) {
+  return currentValue < 10;
+});
+The some method would return true.
+
+Use the some method inside the checkPositive function to check if any element in arr is positive. The function should return a Boolean value.
 */
+function checkPositive(arr) {
+  // Only change code below this line
 
-// ___________________________________________
+  return arr.some((n) => n > 0)
+  // Only change code above this line
+}
+
+checkPositive([1, 2, 3, -4, 5]);
+// ___________________________________________ Introduction to Currying and Partial Application
 
 /*
+The arity of a function is the number of arguments it requires. Currying a function means to convert a function of N arity into N functions of arity 1.
 
+In other words, it restructures a function so it takes one argument, then returns another function that takes the next argument, and so on.
+
+Here's an example:
+
+function unCurried(x, y) {
+  return x + y;
+}
+
+function curried(x) {
+  return function(y) {
+    return x + y;
+  }
+}
+
+const curried = x => y => x + y
+
+curried(1)(2)
+curried(1)(2) would return 3.
+
+This is useful in your program if you can't supply all the arguments to a function at one time. You can save each function call into a variable, which will hold the returned function reference that takes the next argument when it's available. Here's an example using the curried function in the example above:
+
+const funcForY = curried(1);
+console.log(funcForY(2)); // 3
+Similarly, partial application can be described as applying a few arguments to a function at a time and returning another function that is applied to more arguments. Here's an example:
+
+function impartial(x, y, z) {
+  return x + y + z;
+}
+
+const partialFn = impartial.bind(this, 1, 2);
+partialFn(10); // 13
+Fill in the body of the add function so it uses currying to add parameters x, y, and z.
 */
+function add(x) {
+  // Only change code below this line
+  return function(y) {
+    return function(z) {
+      return x + y + z
+    }
+  }
 
-// ___________________________________________
+  // Only change code above this line
+}
+
+add(10)(20)(30);
+// ___________________________________________ Intermediate Algorithm Scripting
+// *******************************************
+
+// ___________________________________________ 1 Sum All Numbers in a Range
 
 /*
+We'll pass you an array of two numbers. Return the sum of those two numbers plus the sum of all the numbers between them. The lowest number will not always come first.
 
+For example, sumAll([4,1]) should return 10 because sum of all the numbers between 1 and 4 (both inclusive) is 10.
 */
-
-// ___________________________________________
+function sumAll(arr) {
+  let newArr = arr.sort((a,b) => a - b)
+  let result = []
+  for(let i = newArr[0]; i <= arr[arr.length-1]; i++) {
+    result.push(newArr[0]++)
+  }
+  return result.reduce((a,b) => a + b,0);
+}
+sumAll([10, 5]);
+// ___________________________________________ 2 Diff Two Arrays
 
 /*
+Compare two arrays and return a new array with any items only found in one of the two given arrays, but not both. In other words, return the symmetric difference of the two arrays.
 
+Note: You can return the array with its elements in any order.
 */
+function diffArray(arr1, arr2) {
+  const newArr = [];
 
+  const longer = arr1.length - arr2.length > 0 ? [...arr1] : [...arr2]
+  const shorter = arr1.length - arr2.length > 0 ? [...arr2] : [...arr1]
+
+  for (let i = 0; i < longer.length; i++) {
+    if (!shorter.includes(longer[i])) {
+      newArr.push(longer[i])
+    }
+  }
+
+  for (let i = 0; i < shorter.length; i++) {
+    if (!longer.includes(shorter[i])) {
+      newArr.push(shorter[i])
+    }
+  }
+  return newArr;
+}
+console.log(diffArray([1, "calf", 3, "piglet"], [7, "filly"]))
+diffArray([1, "calf", 3, "piglet"], [7, "filly"]);
 // ___________________________________________
 
 /*
