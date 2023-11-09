@@ -7841,41 +7841,39 @@ function destroyer(array) {
   return arguments[0].filter(x => !extra.includes(x));
 }
 destroyer([1, 2, 3, 1, 2, 3], 2, 3)
-// ___________________________________________ Almost Even
 
+// ___________________________________________ Wherefore art thou
 
 /*
-We need the ability to divide an unknown integer into a given number of even parts - or at least as even as they can be. The sum of the parts should be the original value, but each part should be an integer, and they should be as close as possible.
+Make a function that looks through an array of objects (first argument) and returns an array of all objects that have matching name and value pairs (second argument). Each name and value pair of the source object has to be present in the object from the collection if it is to be included in the returned array.
 
-Complete the function so that it returns an array of integers representing the parts. If the input number is too small to split it into requested amount of parts, the additional parts should have value 0. Ignoring the order of the parts, there is only one valid solution for each input to your function!
-
-Example:
-splitInteger(20, 6)  // returns [3, 3, 3, 3, 4, 4]
-Inputs
-The input to your function will always be valid for this kata.
+For example, if the first argument is [{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], and the second argument is { last: "Capulet" }, then you must return the third object from the array (the first argument), because it contains the name and its value, that was passed on as the second argument.
 */
-var splitInteger = function(num, parts) {
-  var quotient = Math.floor(num / parts); 
-  var remainder = num % parts; 
+function whatIsInAName(collection, source) {
+  let result = [];
+  const sourceKeys = Object.keys(source);
 
-  var result = []; // Array to store the parts
+  for (let i = 0; i < collection.length; i++) {
+    let isMatch = true;
 
-  // Fill the array with the quotient value
-  for (var i = 0; i < parts; i++) {
-    result.push(quotient);
-  }
+    for (let j = 0; j < sourceKeys.length; j++) {
+      const key = sourceKeys[j];
 
-  // Distribute the remainder evenly among the parts
-  for (var j = 0; j < remainder; j++) {
-    result[j]++;
+      if (collection[i][key] !== source[key]) {
+        isMatch = false;
+        break;
+      }
+    }
+
+    if (isMatch) {
+      result.push(collection[i]);
+    }
   }
 
   return result;
-};
-// ___________________________________________
+}
 
-
-
+whatIsInAName([{"a": 1, "b": 2, "c": 3, "d": 9999}], {"a": 1, "b": 9999, "c": 3});
 // ___________________________________________
 
 /*
