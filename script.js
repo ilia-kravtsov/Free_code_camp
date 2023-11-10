@@ -7874,16 +7874,36 @@ function whatIsInAName(collection, source) {
 }
 
 whatIsInAName([{"a": 1, "b": 2, "c": 3, "d": 9999}], {"a": 1, "b": 9999, "c": 3});
-// ___________________________________________
+// ___________________________________________ Spinal Tap Case
 
 /*
-
+Convert a string to spinal case. Spinal case is all-lowercase-words-joined-by-dashes.
 */
-
-// ___________________________________________
+function spinalCase(str) {
+  let newArr = [...str]
+  for(let i = 1; i < newArr.length; i++) {
+    if (newArr[i].includes('-')) {
+      newArr[i] = '-'
+    } else if (newArr[i].includes(' ') || newArr[i].includes('_')) {
+      newArr[i] = '-'
+    } else if (newArr[i] === newArr[i].toUpperCase() && newArr[i-1] === newArr[i-1].toLowerCase() &&
+     !/[-_]/.test(newArr[i-1])) {
+      newArr[i] = '-' + newArr[i].toLowerCase()
+    } 
+  }
+  return newArr.join('').toLowerCase()
+}
+spinalCase("AllThe-small Things");
+// ___________________________________________ Pig Latin
 
 /*
+Pig Latin is a way of altering English Words. The rules are as follows:
 
+- If a word begins with a consonant, take the first consonant or consonant cluster, move it to the end of the word, and add ay to it.
+
+- If a word begins with a vowel, just add way at the end.
+
+Translate the provided string to Pig Latin. Input strings are guaranteed to be English words in all lowercase.
 */
 
 // ___________________________________________
