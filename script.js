@@ -7905,7 +7905,30 @@ Pig Latin is a way of altering English Words. The rules are as follows:
 
 Translate the provided string to Pig Latin. Input strings are guaranteed to be English words in all lowercase.
 */
+function translatePigLatin(str) {
+  // vowels regex
+  const pattern = /[aeiou]/i
 
+  if (pattern.test(str[0])) {
+  // vowels
+     return str + 'way'
+  } else {
+  // consonants
+  let count = 0 // how many consonants do we have
+  for (let i = 0; i < str.length; i++) {
+    // if consonant
+    if (!pattern.test(str[i])) {
+      count++ // increase the count of consonants
+    } else {
+      break;
+    }
+  }
+  console.log(count) // now we know how many consonants do we have in the beginning 
+  return str.slice(count) + str.slice(0,count) + 'ay'; // preparation of the result 
+  }
+}
+console.log(translatePigLatin("schwartz"))
+translatePigLatin("schwartz");
 // ___________________________________________
 
 /*
