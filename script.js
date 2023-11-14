@@ -7999,7 +7999,26 @@ Find the missing letter in the passed letter range and return it.
 
 If all letters are present in the range, return undefined.
 */
-
+function fearNotLetter(str) {
+  const alphabet = [...'abcdefghijklmnopqrstuvwxyz']
+  const newArr = str.split('')
+  const index = alphabet.indexOf(newArr[0])
+  const needsAlphabet = alphabet.slice(index)
+  let missing = ''
+  let count = 0
+  for (let i = 0; i < needsAlphabet.length; i++) {
+    if (count === 1) {
+      break;
+    }
+    if (needsAlphabet[i] !== newArr[i]) {
+      missing = needsAlphabet[i]
+      count++
+    } 
+  }
+  return missing ? missing : undefined;
+}
+console.log(fearNotLetter("bcdf"))
+fearNotLetter("bcdf");
 // ___________________________________________
 
 /*
