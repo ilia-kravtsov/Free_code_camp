@@ -8128,11 +8128,64 @@ The range will be an array of two numbers that will not necessarily be in numeri
 
 For example, if given 1 and 3, find the smallest common multiple of both 1 and 3 that is also evenly divisible by all numbers between 1 and 3. The answer here would be 6.
 */
+function smallestCommons(arr) {
+  arr.sort((a,b) => a - b)
+  
+  let arr_2 = []
+  for (let i = arr[0]; i <= arr[1]; i++) {
+      arr_2.push(i)
+  }
 
-// ___________________________________________
+  let count = 1
+  let resulting = 1
+  function findResult() {
+    if (arr_2.every(n => Number.isInteger(count/n)) === false) {
+        if (count < 6056823) {
+          count++
+          findResult()
+        }
+    } else {
+        resulting = count
+        return resulting
+    }
+  }
 
+  findResult()
+
+  return resulting;
+}
+
+console.log(smallestCommons([2,10]))
+smallestCommons([2,10]);
+
+function smallestCommons(arr) {
+  arr.sort((a, b) => a - b);
+
+  let period = [];
+  for (let i = arr[0]; i <= arr[1]; i++) {
+      period.push(i);
+  }
+
+  let smallestCommonMultiple = period[0];
+  
+  const greatestCommonDivisor = (a, b) => b === 0 ? a : greatestCommonDivisor(b, a % b);
+
+  const leastCommonDivisor = (a, b) => (a * b) / greatestCommonDivisor(a, b);
+
+  for (let i = 1; i < period.length; i++) {
+    smallestCommonMultiple = leastCommonDivisor(smallestCommonMultiple, period[i]);
+  }
+
+  return smallestCommonMultiple;
+}
+console.log(smallestCommons([1, 13]))
+smallestCommons([2,10]);
+// ___________________________________________ Drop it
+ 
 /*
+Given the array arr, iterate through and remove each element starting from the first element (the 0 index) until the function func returns true when the iterated element is passed through it.
 
+Then return the rest of the array once the condition is satisfied, otherwise, arr should be returned as an empty array.
 */
 
 // ___________________________________________
