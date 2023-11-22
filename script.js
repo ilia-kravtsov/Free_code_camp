@@ -8187,19 +8187,53 @@ Given the array arr, iterate through and remove each element starting from the f
 
 Then return the rest of the array once the condition is satisfied, otherwise, arr should be returned as an empty array.
 */
-
-// ___________________________________________
+function dropElements(arr, func) {
+  while (!func(arr[0])) {
+     arr.shift();
+   }
+   return arr;
+ }
+ 
+ dropElements([0, 1, 0, 1], function(n) {return n === 1})
+// ___________________________________________ Steamroller
 
 /*
-
+Flatten a nested array. You must account for varying levels of nesting.
 */
+const stack = [...arr];
+const res = [];
+while (stack.length) {
 
-// ___________________________________________
+const next = stack.pop();
+  if (Array.isArray(next)) {
+    stack.push(...next);
+  } else {
+    res.push(next);
+  }
+}
+
+return res.reverse();
+// ___________________________________________ Binary Agents
 
 /*
+Return an English translated sentence of the passed binary string.
+
+The binary string will be space separated.
+
 
 */
+function binaryAgent(str) {
+  let n = str.split(" ");
+  let b = [];
 
+  for (let i = 0; i < n.length; i++) {
+      b.push(String.fromCharCode(parseInt(n[i], 2)));
+  }
+  
+  return b.join("");
+}
+
+binaryAgent("01000001 01110010 01100101 01101110 00100111 01110100 00100000 01100010 01101111 01101110 01100110 01101001 01110010 01100101 01110011 00100000 01100110 01110101 01101110 00100001 00111111");
 // ___________________________________________
 
 /*
