@@ -8256,16 +8256,58 @@ function truthCheck(collection, pre) {
 }
 
 truthCheck([{name: "Quincy", role: "Founder", isBot: false}, {name: "Naomi", role: "", isBot: false}, {name: "Camperbot", role: "Bot", isBot: true}], "isBot");
-// ___________________________________________
+// ___________________________________________ Arguments Optional
 
 /*
+Create a function that sums two arguments together. If only one argument is provided, then return a function that expects one argument and returns the sum.
 
+For example, addTogether(2, 3) should return 5, and addTogether(2) should return a function.
+
+Calling this returned function with a single argument will then return the sum:
+
+var sumTwoAnd = addTogether(2);
+sumTwoAnd(3) returns 5.
+
+If either argument isn't a valid number, return undefined.
 */
+function addTogether() {
+  function checkNum(num) {
+    return typeof num === "number" ? num : undefined;
+  }
+  if (arguments.length > 1) {
+    let a = checkNum(arguments[0]);
+    let b = checkNum(arguments[1]);
 
-// ___________________________________________
+    if (a !== undefined && b !== undefined) {
+      return a + b;
+    } else {
+      return undefined;
+    }
+  } else {
+    let c = checkNum(arguments[0]);
+
+    if (c !== undefined) {
+      return function (arg) {
+        return checkNum(arg) !== undefined ? c + checkNum(arg) : undefined;
+      };
+    } else {
+      return undefined;
+    }
+}
+}
+addTogether(5)(7)
+// ___________________________________________ Make a Person
 
 /*
+Fill in the object constructor with the following methods below:
 
+getFirstName()
+getLastName()
+getFullName()
+setFirstName(first)
+setLastName(last)
+setFullName(first, last)
+Run the tests to see the expected output for each method. These methods must be the only available means of interacting with the object. Each test will declare a new Person instance as new Person('Bob', 'Ross').
 */
 
 // ___________________________________________
