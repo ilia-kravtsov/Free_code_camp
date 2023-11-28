@@ -8309,7 +8309,35 @@ setLastName(last)
 setFullName(first, last)
 Run the tests to see the expected output for each method. These methods must be the only available means of interacting with the object. Each test will declare a new Person instance as new Person('Bob', 'Ross').
 */
+const Person = function(first, last) {
+  let firstName = first;
+  let lastName = last;
 
+  this.getFirstName = function() {
+    return firstName;
+  };
+
+  this.getLastName = function() {
+    return lastName;
+  };
+
+  this.getFullName = function() {
+    return `${firstName} ${lastName}`;
+  };
+
+  this.setFirstName = function(newFirst) {
+    firstName = newFirst;
+  };
+
+  this.setLastName = function(newLast) {
+    lastName = newLast;
+  };
+
+  this.setFullName = function(newFirst, newLast) {
+    firstName = newFirst;
+    lastName = newLast;
+  };
+};
 // ___________________________________________
 
 /*
