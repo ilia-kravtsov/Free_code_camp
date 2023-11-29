@@ -8366,30 +8366,41 @@ Get Help
 */
 // fix later
 function orbitalPeriod(arr) {
-  const GM = Math.round(398600.4418);
-  const earthRadius = Math.round(6367.4447);
-
-  function calculateOrbitalPeriod(avgAlt) {
-    const newAlt = Math.round(avgAlt)
-    const axis = earthRadius + newAlt;
-    const period = Math.round(2 * Math.PI * Math.sqrt(Math.pow(axis, 3) / GM));
-    return period;
+  const GM = 398600.4418; // km^3/s^2
+  const earthRadius = 6367.4447; // km
+  for (let i = 0; i < arr.length; i++) {
+    const a = earthRadius + arr[i].avgAlt; // km
+    const a3 = a ** 3;
+    const underRoot = a3 / GM;
+    const root = Math.sqrt(underRoot);
+    const pi = Math.PI;
+    const T = 2 * pi * root;
+    arr[i]['orbitalPeriod'] = Math.round(T);
+    delete arr[i].avgAlt;
   }
-
-  const transformedArr = arr.map(obj => {
-    const orbitalPeriod = calculateOrbitalPeriod(obj.avgAlt);
-    return { name: obj.name, orbitalPeriod };
-  });
-
-  return transformedArr;
+  return arr;
 }
 
-orbitalPeriod([{ name: 'sputnik', avgAlt: 35873.5553 }]);
+orbitalPeriod([{name : "sputnik", avgAlt : 35873.5553}]);
 
-// ___________________________________________
+// ___________________________________________ Palindrome Checker
 
+/*
+Return true if the given string is a palindrome. Otherwise, return false.
 
+A palindrome is a word or sentence that's spelled the same way both forward and backward, ignoring punctuation, case, and spacing.
 
+Note: You'll need to remove all non-alphanumeric characters (punctuation, spaces and symbols) and turn everything into the same case (lower or upper case) in order to check for palindromes.
+
+We'll pass strings with varying formats, such as racecar, RaceCar, and race CAR among others.
+
+We'll also pass strings with special symbols, such as 2A3*3a2, 2A3 3a2, and 2_A3*3#A2.
+*/
+function palindrome(str) {
+  let cleanStr = str.replace(/[^a-zA-Z0-9]/g, '').toLowerCase()
+  return cleanStr === cleanStr.split('').reverse().join('')
+}
+palindrome("A man, a plan, a canal. Panama");
 // ___________________________________________
 
 /*
