@@ -8401,16 +8401,131 @@ function palindrome(str) {
   return cleanStr === cleanStr.split('').reverse().join('')
 }
 palindrome("A man, a plan, a canal. Panama");
-// ___________________________________________
+// ___________________________________________ Roman Numeral Converter
+
 
 /*
+Convert the given number into a roman numeral.
 
+Roman numerals	Arabic numerals
+M	1000
+CM	900
+D	500
+CD	400
+C	100
+XC	90
+L	50
+XL	40
+X	10
+IX	9
+V	5
+IV	4
+I	1
+All roman numerals answers should be provided in upper-case.
 */
+function convertToRoman(arabNum) {
 
-// ___________________________________________
+  const units = (number) => {
+    if (number < 10) {
+      if (number < 4) {
+        return 'I'.repeat(number)
+      } else if (number === 4) {
+        return 'IV'
+      } else if (number === 5) {
+        return 'V'
+      } else if (number === 6) {
+        return 'VI'
+      } else if (number === 7) {
+        return 'VII'
+      } else if (number === 8) {
+        return 'VIII'
+      } else if (number === 9) {
+        return 'IX'
+      }
+    } else {
+      return 'i need a smaller one unit'
+    }
+  }
+ 
+ const decades = (number) => {
+    if (number < 100) {
+      if (number < 40) {
+         return 'X'.repeat(+number.toString()[0])
+      } else if (number === 40) {
+         return 'XL'
+      } else if (number === 50) {
+         return 'L'
+      } else if (number === 60) {
+         return 'LX'
+      } else if (number === 70) {
+         return 'LXX'
+      } else if (number === 80) {
+         return 'LXXX'
+      } else if (number === 90) {
+        return 'XC'
+      }
+    } else {
+      return 'i need another one'
+    }
+  }
+ 
+  const hundreds = (number) => {
+    if (number < 1000) {
+      if (number < 400) {
+         return 'C'.repeat(+number.toString()[0])
+      } else if (number === 400) {
+         return 'CD'
+      } else if (number === 500) {
+         return 'D'
+      } else if (number === 600) {
+         return 'DC'
+      } else if (number === 700) {
+         return 'DCC'
+      } else if (number === 800) {
+         return 'DCCC'
+      } else if (number === 900) {
+         return 'CM'
+      }
+    } else {
+      return 'i need another one'
+    }
+  }
+ 
+   const thousands = (number) => {
+    if (number < 10000) {
+         return 'M'.repeat(+number.toString()[0])
+    } else {
+      return 'i need another one'
+    }
+  }
+ 
+   let arabNumStr = arabNum.toString()
+   for (let i = 0; i < arabNumStr.length; i++) {
+     if (arabNumStr.length === 1) {
+       return units(arabNum)
+     } else if (arabNumStr.length === 2) {
+       return decades(Number(arabNumStr[0] + '0')) + units(+arabNumStr[1])
+     } else if (arabNumStr.length === 3) {
+       return hundreds(Number(+arabNumStr[0] + '00')) + decades(Number(arabNumStr[1] + '0')) + units(+arabNumStr[2])
+     } else if (arabNumStr.length === 4) {
+       return thousands(Number(+arabNumStr[0] + '000')) + hundreds(Number(+arabNumStr[1] + '00')) + decades(Number(arabNumStr[2] + '0')) + units(+arabNumStr[3])
+     }
+   }
+ }
+ console.log(convertToRoman(3999))
+ 
+ convertToRoman(36);
+// ___________________________________________ Caesars Cipher
+
 
 /*
+One of the simplest and most widely known ciphers is a Caesar cipher, also known as a shift cipher. In a shift cipher the meanings of the letters are shifted by some set amount.
 
+A common modern use is the ROT13 cipher, where the values of the letters are shifted by 13 places. Thus A ↔ N, B ↔ O and so on.
+
+Write a function which takes a ROT13 encoded string as input and returns a decoded string.
+
+All letters will be uppercase. Do not transform any non-alphabetic character (i.e. spaces, punctuation), but do pass them on.
 */
 
 // ___________________________________________
