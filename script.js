@@ -8402,8 +8402,12 @@ function palindrome(str) {
 }
 palindrome("A man, a plan, a canal. Panama");
 // ___________________________________________ Roman Numeral Converter
+<<<<<<< Updated upstream
 
 
+=======
+ 
+>>>>>>> Stashed changes
 /*
 Convert the given number into a roman numeral.
 
@@ -8423,6 +8427,7 @@ IV	4
 I	1
 All roman numerals answers should be provided in upper-case.
 */
+<<<<<<< Updated upstream
 function convertToRoman(arabNum) {
 
   const units = (number) => {
@@ -8526,6 +8531,66 @@ A common modern use is the ROT13 cipher, where the values of the letters are shi
 Write a function which takes a ROT13 encoded string as input and returns a decoded string.
 
 All letters will be uppercase. Do not transform any non-alphabetic character (i.e. spaces, punctuation), but do pass them on.
+=======
+function convertToRoman(num) {
+  const dictionary = {
+    '1000' : 'M',
+    '900' : 'CM',
+    '500' : 'D',
+    '400' : 'CD',
+    '100' : 'C',
+    '90' : 'XC',
+    '50' : 'L',
+    '40' : 'XL',
+    '10' : 'X',
+    '9' : 'IX',
+    '5' : 'V',
+    '4' : 'IV',
+    '1' : 'I'
+  }
+
+  const units = (number) => {
+    if (number.toString().length === 1) {
+      if (number < 4) {
+        return dictionary['1'].repeat(number)
+      } else if (number === 4) {
+        return dictionary['4']
+      } else if (number === 5) {
+        return dictionary['5']
+      } else if (number === 9) {
+        return dictionary['9']
+      } 
+    } else {
+      return 'i need a smaller number'
+    }
+  }
+
+  const decades = (number) => {
+      const numberStr = number.toString()
+      const length = number.toString().length
+      if (length === 2) {
+        console.log(numberStr[0])
+      } else {
+        return 'this number doesn\'t suit me'
+      }
+  }
+
+
+  const numToStr = num.toString()
+  if (numToStr.length === 1) {
+    return units(num)
+  } else if (numToStr.length === 2) {
+    return decades(num)
+  }
+  
+}
+console.log(convertToRoman(10))
+convertToRoman(2);
+// ___________________________________________
+
+/*
+
+>>>>>>> Stashed changes
 */
 
 // ___________________________________________
