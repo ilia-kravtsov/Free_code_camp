@@ -8401,6 +8401,15 @@ function palindrome(str) {
   return cleanStr === cleanStr.split('').reverse().join('')
 }
 palindrome("A man, a plan, a canal. Panama");
+
+function palindrome(str) {
+  // here i remove all non-alphanumeric characters
+  let cleanString = str.replace(/[^a-zA-Z0-9]/g, '').toLowerCase()
+  // here i check if the cleanString is a palindrome.
+  return cleanString === cleanString.split('').reverse().join('')
+}
+
+palindrome("eye");
 // ___________________________________________ Roman Numeral Converter
 <<<<<<< Updated upstream
 
@@ -8520,6 +8529,117 @@ function convertToRoman(arabNum) {
  console.log(convertToRoman(3999))
  
  convertToRoman(36);
+
+  function convertToRoman(num) {
+
+    // The main idea of my code here is:
+    // to convert the input number into a sum of numbers
+    // separated by units, tens, hundreds, and thousands
+    // for example 37 = 30 + 7
+    // and then convert these numbers (30 and 7)
+    // into a Roman numerals independently of each other
+    // and finally concatenate the result
+
+    const units = (number) => {
+    if (number < 10) {
+    if (number < 4) {
+    return 'I'.repeat(number)
+  } else if (number === 4) {
+    return 'IV'
+  } else if (number === 5) {
+    return 'V'
+  } else if (number === 6) {
+    return 'VI'
+  } else if (number === 7) {
+    return 'VII'
+  } else if (number === 8) {
+    return 'VIII'
+  } else if (number === 9) {
+    return 'IX'
+  }
+  } else {
+    return 'i need units'
+  }
+  }
+
+    const tens = (number) => {
+    if (number < 100) {
+    if (number < 40) {
+    return 'X'.repeat(+number.toString()[0])
+  } else if (number === 40) {
+    return 'XL'
+  } else if (number === 50) {
+    return 'L'
+  } else if (number === 60) {
+    return 'LX'
+  } else if (number === 70) {
+    return 'LXX'
+  } else if (number === 80) {
+    return 'LXXX'
+  } else if (number === 90) {
+    return 'XC'
+  }
+  } else {
+    return 'i need tens'
+  }
+  }
+
+    const hundreds = (number) => {
+    if (number < 1000) {
+    if (number < 400) {
+    return 'C'.repeat(+number.toString()[0])
+  } else if (number === 400) {
+    return 'CD'
+  } else if (number === 500) {
+    return 'D'
+  } else if (number === 600) {
+    return 'DC'
+  } else if (number === 700) {
+    return 'DCC'
+  } else if (number === 800) {
+    return 'DCCC'
+  } else if (number === 900) {
+    return 'CM'
+  }
+  } else {
+    return 'i need hundreds'
+  }
+  }
+
+    const thousands = (number) => {
+    if (number < 10000) {
+    return 'M'.repeat(+number.toString()[0])
+  } else {
+    return 'i need thousands'
+  }
+  }
+
+    let numToStr = num.toString()
+
+    switch (numToStr.length) {
+    case 1:
+    return units(num);
+    case 2:
+    return tens(Number(numToStr[0] + '0'))
+    + units(+numToStr[1]);
+    case 3:
+    return hundreds(Number(+numToStr[0] + '00'))
+    + tens(Number(numToStr[1] + '0'))
+    + units(+numToStr[2]);
+    case 4:
+    return thousands(Number(+numToStr[0] + '000'))
+    + hundreds(Number(+numToStr[1] + '00'))
+    + tens(Number(numToStr[2] + '0'))
+    + units(+numToStr[3]);
+    default:
+    return 'I work up to 10,000';
+  }
+  }
+
+  convertToRoman(36);
+
+  convertToRoman(36);
+
 // ___________________________________________ Caesars Cipher
 
 
@@ -8593,30 +8713,260 @@ convertToRoman(2);
 >>>>>>> Stashed changes
 */
 
-// ___________________________________________
+// ___________________________________________ Caesars Cipher
 
 /*
+One of the simplest and most widely known ciphers is a Caesar cipher, also known as a shift cipher. In a shift cipher the meanings of the letters are shifted by some set amount.
+
+A common modern use is the ROT13 cipher, where the values of the letters are shifted by 13 places. Thus A ↔ N, B ↔ O and so on.
+
+Write a function which takes a ROT13 encoded string as input and returns a decoded string.
+
+All letters will be uppercase. Do not transform any non-alphabetic character (i.e. spaces, punctuation), but do pass them on.
+
 
 */
+function rot13(str) {
+  const alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"]
+  const shiftedAlphabet = alphabet.slice(13).concat(alphabet.slice(0, 13));
+  const newArr = str.split('')
+  for(let i = 0; i < newArr.length; i++) {
+    if (alphabet.includes(newArr[i])) {
+      let index = alphabet.indexOf(newArr[i])
+      newArr[i] = shiftedAlphabet[index]
+    }
+  }
+  return newArr.join('');
+}
 
-// ___________________________________________
+rot13("SERR PBQR PNZC");
+
+  function rot13(str) {
+
+    const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K',
+    'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+
+    // here i'm receiving an alphabet with shifted positions of the letters.
+    const shiftedAlphabet = alphabet.slice(13).concat(alphabet.slice(0, 13));
+
+    const newArr = str.split('')
+
+    // then i'll check a letter index of the input str into alphabet
+    // and reassign new value from shiftedAlphabet
+    for(let i = 0; i < newArr.length; i++) {
+    if (alphabet.includes(newArr[i])) {
+    let index = alphabet.indexOf(newArr[i])
+    newArr[i] = shiftedAlphabet[index]
+  }
+  }
+    return newArr.join('');
+  }
+
+  rot13("SERR PBQR PNZC");
+// ___________________________________________ Telephone Number Validator
 
 /*
+Return true if the passed string looks like a valid US phone number.
+
+The user may fill out the form field any way they choose as long as it has the format of a valid US number. The following are examples of valid formats for US numbers (refer to the tests below for other variants):
+
+555-555-5555
+(555)555-5555
+(555) 555-5555
+555 555 5555
+5555555555
+1 555 555 5555
+For this challenge you will be presented with a string such as 800-692-7753 or 8oo-six427676;laskdjf. Your job is to validate or reject the US phone number based on any combination of the formats provided above. The area code is required. If the country code is provided, you must confirm that the country code is 1. Return true if the string is a valid US phone number; otherwise return false.
+
 
 */
+function telephoneCheck(str) {
+  if (str[0] === '-' && Number.isInteger(+str[1])) return false;
+  if (str[0] === '2') return false;
+  if (Number.isInteger(+str[0]) && Number.isInteger(+str[1]) && str[2] === ' ') return false;
+  let cleanStr = str.replace(/[^0-9()]/g, '')
 
-// ___________________________________________
+  if (cleanStr.length === 10 || cleanStr.length === 11 || cleanStr.length === 12 || cleanStr.length === 13) {
+    if (cleanStr.split('').every(n => Number.isInteger(+n))) {
+      return true
+    } else if (cleanStr[0] === '1' && cleanStr[1] === '(' && cleanStr[5] === ')') {
+      return true
+    } else if (cleanStr.length === 12 && cleanStr[0] === '(' && cleanStr[4] === ')' ) {
+      return true
+    } else {
+      return false
+    }
+  }
+  else {
+      return false
+  }
+}
+
+telephoneCheck("55 55-55-555-5");
+telephoneCheck("11 555-555-5555");
+
+    function telephoneCheck(str) {
+
+    if (str[0] === '-' && Number.isInteger(+str[1])) return false;
+    if (str[0] === '2') return false;
+    if (Number.isInteger(+str[0]) && Number.isInteger(+str[1]) && str[2] === ' ') {
+    return false;
+  }
+
+    let cleanStr = str.replace(/[^0-9()]/g, '')
+
+    // here i check the correctness of the length
+    const lengths = [10, 11, 12, 13];
+    const isValid = lengths.includes(cleanStr.length);
+
+    if (isValid) {
+    if (cleanStr.split('').every(n => Number.isInteger(+n))) {
+    return true
+  } else if (cleanStr[0] === '1' && cleanStr[1] === '(' && cleanStr[5] === ')') {
+    return true
+  } else if (cleanStr.length === 12 && cleanStr[0] === '(' && cleanStr[4] === ')' ) {
+    return true
+  } else {
+    return false
+  }
+  } else {
+    return false
+  }
+  }
+
+  telephoneCheck("555-555-5555");
+// ___________________________________________ Cash Register
 
 /*
+Design a cash register drawer function checkCashRegister() that accepts purchase price as the first argument (price), payment as the second argument (cash), and cash-in-drawer (cid) as the third argument.
 
+cid is a 2D array listing available currency.
+
+The checkCashRegister() function should always return an object with a status key and a change key.
+
+Return {status: "INSUFFICIENT_FUNDS", change: []} if cash-in-drawer is less than the change due, or if you cannot return the exact change.
+
+Return {status: "CLOSED", change: [...]} with cash-in-drawer as the value for the key change if it is equal to the change due.
+
+Otherwise, return {status: "OPEN", change: [...]}, with the change due in coins and bills, sorted in highest to lowest order, as the value of the change key.
+
+Currency Unit	Amount
+Penny	$0.01 (PENNY)
+Nickel	$0.05 (NICKEL)
+Dime	$0.1 (DIME)
+Quarter	$0.25 (QUARTER)
+Dollar	$1 (ONE)
+Five Dollars	$5 (FIVE)
+Ten Dollars	$10 (TEN)
+Twenty Dollars	$20 (TWENTY)
+One-hundred Dollars	$100 (ONE HUNDRED)
+See below for an example of a cash-in-drawer array:
+
+[
+  ["PENNY", 1.01],
+  ["NICKEL", 2.05],
+  ["DIME", 3.1],
+  ["QUARTER", 4.25],
+  ["ONE", 90],
+  ["FIVE", 55],
+  ["TEN", 20],
+  ["TWENTY", 60],
+  ["ONE HUNDRED", 100]
+]
 */
 
-// ___________________________________________
+// ___________________________________________ Cash Register
 
 /*
+Design a cash register drawer function checkCashRegister() that accepts purchase price as the first argument (price), payment as the second argument (cash), and cash-in-drawer (cid) as the third argument.
 
+cid is a 2D array listing available currency.
+
+The checkCashRegister() function should always return an object with a status key and a change key.
+
+Return {status: "INSUFFICIENT_FUNDS", change: []} if cash-in-drawer is less than the change due, or if you cannot return the exact change.
+
+Return {status: "CLOSED", change: [...]} with cash-in-drawer as the value for the key change if it is equal to the change due.
+
+Otherwise, return {status: "OPEN", change: [...]}, with the change due in coins and bills, sorted in highest to lowest order, as the value of the change key.
+
+Currency Unit	Amount
+Penny	$0.01 (PENNY)
+Nickel	$0.05 (NICKEL)
+Dime	$0.1 (DIME)
+Quarter	$0.25 (QUARTER)
+Dollar	$1 (ONE)
+Five Dollars	$5 (FIVE)
+Ten Dollars	$10 (TEN)
+Twenty Dollars	$20 (TWENTY)
+One-hundred Dollars	$100 (ONE HUNDRED)
+See below for an example of a cash-in-drawer array:
+
+[
+  ["PENNY", 1.01],
+  ["NICKEL", 2.05],
+  ["DIME", 3.1],
+  ["QUARTER", 4.25],
+  ["ONE", 90],
+  ["FIVE", 55],
+  ["TEN", 20],
+  ["TWENTY", 60],
+  ["ONE HUNDRED", 100]
+]
 */
+function checkCashRegister(price, cash, cid) {
+  const currencyValues = {
+    "PENNY": 0.01,
+    "NICKEL": 0.05,
+    "DIME": 0.1,
+    "QUARTER": 0.25,
+    "ONE": 1,
+    "FIVE": 5,
+    "TEN": 10,
+    "TWENTY": 20,
+    "ONE HUNDRED": 100
+  };
 
+  let changeDue = cash - price;
+  let totalCid = cid.reduce((acc, curr) => acc + curr[1], 0);
+
+  if (totalCid < changeDue) {
+    return { status: "INSUFFICIENT_FUNDS", change: [] };
+  }
+
+  if (totalCid === changeDue) {
+    return { status: "CLOSED", change: cid };
+  }
+
+  const changeArray = [];
+  cid = cid.reverse();
+
+  for (let i = 0; i < cid.length; i++) {
+    const currency = cid[i][0];
+    const currencyValue = currencyValues[currency];
+    let currencyAmount = cid[i][1];
+    let currencyCount = 0;
+
+    while (changeDue >= currencyValue && currencyAmount > 0) {
+      changeDue -= currencyValue;
+      changeDue = Math.round(changeDue * 100) / 100;
+      currencyAmount -= currencyValue;
+      currencyCount += currencyValue;
+    }
+
+    if (currencyCount > 0) {
+      changeArray.push([currency, currencyCount]);
+    }
+  }
+
+  if (changeDue > 0) {
+    return { status: "INSUFFICIENT_FUNDS", change: [] };
+  }
+
+  return { status: "OPEN", change: changeArray };
+}
+
+checkCashRegister(3.26, 100, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]);
 // ___________________________________________
 
 /*
