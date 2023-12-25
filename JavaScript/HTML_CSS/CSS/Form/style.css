@@ -40,13 +40,14 @@ textarea,
 select {
   margin: 10px 0 0 0;
   width: 100%;
+  min-height: 2em; /* Move the min-height property and value here */
 }
 
-input, textarea {
+input,
+textarea {
   background-color: #0a0a23;
   border: 1px solid #0a0a23;
   color: #ffffff;
-  min-height: 2em;
 }
 
 .inline {
