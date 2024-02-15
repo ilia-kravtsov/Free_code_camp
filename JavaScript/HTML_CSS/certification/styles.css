@@ -65,22 +65,23 @@ body::before {
 
 #survey-form {
     background: var(--color-darkblue-alpha);
-    padding: 40px;
+    padding: 44px;
     border-radius: 5px;
     width: 720px;
 }
 
 #survey-form label {
     display: block;
-    margin: 10px 0;
+    font-size: 18px;
 }
 
 #additional {
-    font-size: 15px;
+    font-size: 14.4px;
+    margin-left: 4px;
 }
 
 #survey-form label:nth-child(-n + 8) {
-    margin: 30px 0 10px 0;
+    margin: 30px 0 8px 0;
 }
 
 #survey-form label:first-child {
@@ -89,25 +90,36 @@ body::before {
 
 #survey-form input[type='text'],input[type='email'], input[type='number'] {
     border-radius: 5px;
-    padding: 10px;
+    padding: 6.5px 10px 6.5px 13px;
     width: 100%;
+    font-size: 16px;
+    color: rgba(73,80,87,0.97);
 }
 
 #survey-form select {
     width: 100%;
-    padding: 10px;
+    padding: 6.5px 10px 6.5px 13px;
     color: #495057;
     border-radius: 5px;
-    font-size: 18px;
+    font-size: 16px;
+    font-family: 'Poppins';
+    cursor: pointer;
 }
 
 #survey-form input[type='radio'] {
-    transform: scale(1.5);
-    margin-right: 5px;
+    margin-right: 10px;
+    height: 20px;
+    width: 20px;
+}
+
+#survey-form .label-radio {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
 }
 
 #survey-form input::placeholder {
-    color: #495057;
+    color: rgba(117,117,117,0.97);
     font-size: 16px;
 }
 
@@ -136,4 +148,14 @@ body::before {
     color: inherit;
     border-radius: 2px;
     cursor: pointer;
+}
+
+#name-label {
+    line-height: 1.4;
+}
+
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
 }
